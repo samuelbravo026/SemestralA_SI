@@ -3,6 +3,38 @@
    Estilos específicos para la interfaz del modelo de Machine Learning
    ============================================================================ */
 
+/* Layout sin Sidebar */
+body.no-sidebar {
+    display: block;
+}
+
+body.no-sidebar .main-content {
+    margin-left: 0;
+    width: 100%;
+}
+
+.main-content.full-width {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-title i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
 /* Control Panel */
 .control-panel {
     margin-bottom: 2rem;
