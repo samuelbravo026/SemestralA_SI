@@ -47,21 +47,33 @@ def run_analysis():
         latest_results['status'] = 'running'
         latest_results['timestamp'] = datetime.now().isoformat()
 
+        # Detect Python command (try python, python3, py)
+        import sys
+        python_cmd = sys.executable  # Use the same Python that's running Flask
+
+        print(f"Starting analysis with Python: {python_cmd}")
+        print(f"Current directory: {os.getcwd()}")
+
         # Run the model script
-        print("Starting analysis...")
         result = subprocess.run(
-            ['python', 'model_a.py'],
+            [python_cmd, 'model_a.py'],
             capture_output=True,
             text=True,
-            timeout=300  # 5 minutes timeout
+            timeout=300,  # 5 minutes timeout
+            cwd=os.path.dirname(os.path.abspath(__file__))  # Run in script directory
         )
+
+        print(f"Analysis completed with return code: {result.returncode}")
 
         if result.returncode != 0:
             latest_results['status'] = 'error'
+            error_msg = result.stderr if result.stderr else "Unknown error"
+            print(f"ERROR: {error_msg}")
             return jsonify({
                 'status': 'error',
                 'message': 'Error running model',
-                'error': result.stderr
+                'error': error_msg,
+                'stdout': result.stdout[:1000] if result.stdout else ""  # First 1000 chars
             }), 500
 
         # Parse results from output
@@ -92,18 +104,24 @@ def run_analysis():
             'results': latest_results
         })
 
-    except subprocess.TimeoutExpired:
+    except subprocess.TimeoutExpired as e:
         latest_results['status'] = 'error'
+        error_msg = 'Analysis timeout (exceeded 5 minutes)'
+        print(f"TIMEOUT ERROR: {error_msg}")
         return jsonify({
             'status': 'error',
-            'message': 'Analysis timeout (exceeded 5 minutes)'
+            'message': error_msg
         }), 500
 
     except Exception as e:
+        import traceback
         latest_results['status'] = 'error'
+        error_details = traceback.format_exc()
+        print(f"EXCEPTION ERROR: {error_details}")
         return jsonify({
             'status': 'error',
-            'message': str(e)
+            'message': str(e),
+            'details': error_details[:500]  # First 500 chars of traceback
         }), 500
 
 @app.route('/api/status', methods=['GET'])

@@ -135,7 +135,17 @@ async function handleRunAnalysis() {
         });
 
         if (!response.ok) {
-            throw new Error('Error en el servidor');
+            // Try to get error details from response
+            let errorData;
+            try {
+                errorData = await response.json();
+            } catch (e) {
+                throw new Error(`Error del servidor (${response.status}): ${response.statusText}`);
+            }
+
+            const errorMsg = errorData.error || errorData.message || 'Error desconocido';
+            const details = errorData.details || errorData.stdout || '';
+            throw new Error(`${errorMsg}\n\nDetalles: ${details}`);
         }
 
         const data = await response.json();
@@ -155,6 +165,10 @@ async function handleRunAnalysis() {
                 showNotification('Análisis completado exitosamente', 'success');
                 scrollToResults();
             }, 1000);
+        } else if (data.status === 'error') {
+            const errorMsg = data.error || data.message || 'Error desconocido';
+            const details = data.details || data.stdout || '';
+            throw new Error(`${errorMsg}\n\nDetalles: ${details}`);
         } else {
             throw new Error(data.message || 'Error desconocido');
         }
