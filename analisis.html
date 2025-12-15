@@ -8,74 +8,18 @@
     <link rel="stylesheet" href="css/analisis.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="logo">
-            <i class="fas fa-cube"></i>
-            <h2>Sistema SI</h2>
-        </div>
-        <nav class="nav-menu">
-            <a href="index.html" class="nav-item">
-                <i class="fas fa-home"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="usuarios.html" class="nav-item">
-                <i class="fas fa-users"></i>
-                <span>Usuarios</span>
-            </a>
-            <a href="productos.html" class="nav-item">
-                <i class="fas fa-box"></i>
-                <span>Productos</span>
-            </a>
-            <a href="analisis.html" class="nav-item active">
-                <i class="fas fa-brain"></i>
-                <span>Análisis ML</span>
-            </a>
-            <a href="reportes.html" class="nav-item">
-                <i class="fas fa-chart-bar"></i>
-                <span>Reportes</span>
-            </a>
-            <a href="configuracion.html" class="nav-item">
-                <i class="fas fa-cog"></i>
-                <span>Configuración</span>
-            </a>
-        </nav>
-        <div class="sidebar-footer">
-            <div class="user-info">
-                <div class="avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-details">
-                    <p class="user-name">Admin</p>
-                    <p class="user-role">Administrador</p>
-                </div>
-            </div>
-            <a href="#" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i>
-            </a>
-        </div>
-    </aside>
-
+<body class="no-sidebar">
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content full-width">
         <!-- Header -->
         <header class="header">
             <div class="header-left">
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <h1>Análisis de Popularidad de Spotify</h1>
+                <div class="header-title">
+                    <i class="fas fa-music"></i>
+                    <h1>Spotify Popularity Analysis - Machine Learning</h1>
+                </div>
             </div>
             <div class="header-right">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Buscar...">
-                </div>
-                <button class="notification-btn">
-                    <i class="fas fa-bell"></i>
-                    <span class="badge">3</span>
-                </button>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -90,7 +34,7 @@
                         <i class="fas fa-play-circle"></i>
                         <div>
                             <h3>Control del Análisis</h3>
-                            <p>Ejecuta el pipeline completo de Machine Learning</p>
+                            <p>Ejecuta el pipeline completo de Machine Learning (model_a.py)</p>
                         </div>
                     </div>
                     <div class="status-badge" id="statusBadge">
