@@ -2,6 +2,22 @@
 
 Interfaz web profesional para ejecutar y visualizar el análisis de Machine Learning del modelo `model_a.py` que predice la popularidad de canciones en Spotify.
 
+## ⚡ INICIO RÁPIDO
+
+**¿Primera vez? Lee [`INICIO_RAPIDO.md`](INICIO_RAPIDO.md) para empezar en 3 pasos.**
+
+### Pasos esenciales:
+
+1. **Inicia el servidor Flask:**
+   - Windows: Ejecuta `start.bat`
+   - Linux/Mac: Ejecuta `./start.sh`
+
+2. **Abre `analisis.html` en tu navegador**
+
+3. **Haz clic en "Ejecutar Análisis Completo"**
+
+⚠️ **IMPORTANTE:** El servidor Flask DEBE estar corriendo antes de usar la interfaz.
+
 ## 🚀 Características
 
 - **Ejecución del Modelo**: Ejecuta el pipeline completo de ML con un solo clic
